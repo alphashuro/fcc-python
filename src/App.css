@@ -34,3 +34,8 @@
 .col {
   flex: 1;
 }
+
+.col > * {
+  border: solid 1px black;
+  margin-top: 1px;
+}

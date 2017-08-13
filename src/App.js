@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 
 import Challenge from './Challenge'
@@ -8,6 +7,24 @@ import Tests from './Tests'
 import Output from './Output'
 
 class App extends Component {
+  state = {
+    code: ''
+  }
+
+  constructor(props) {
+    super(props)
+    this.handleCodeChanged = this.handleCodeChanged.bind(this)
+    this.handleRunClicked = this.handleRunClicked.bind(this)
+  }
+
+  handleCodeChanged(code) {
+    this.setState({ code })
+  }
+
+  handleRunClicked() {
+    console.log(this.state.code)
+  }
+
   render() {
     return (
       <div className="App flex-grid">
@@ -16,7 +33,10 @@ class App extends Component {
           <Tests />
         </div>
         <div className="col">
-          <Editor />
+          <Editor
+            onChange={this.handleCodeChanged}
+            onRun={this.handleRunClicked}
+          />
           <Output />
         </div>
       </div>
