@@ -1,3 +1,9 @@
 import React from 'react'
 
-export default () => <div>Output</div>
+export default ({ text }) =>
+  <div>
+    <h2>Output</h2>
+    <pre>
+      {text}
+    </pre>
+  </div>

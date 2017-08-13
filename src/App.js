@@ -5,10 +5,12 @@ import Challenge from './Challenge'
 import Editor from './Editor'
 import Tests from './Tests'
 import Output from './Output'
+import { compile } from './compiler'
 
 class App extends Component {
   state = {
-    code: ''
+    code: '',
+    output: ''
   }
 
   constructor(props) {
@@ -22,7 +24,9 @@ class App extends Component {
   }
 
   handleRunClicked() {
-    console.log(this.state.code)
+    compile(this.state.code)
+      .scan((a, b) => a + '\n' + b)
+      .subscribe(output => this.setState({ output }), console.error)
   }
 
   render() {
@@ -37,7 +41,7 @@ class App extends Component {
             onChange={this.handleCodeChanged}
             onRun={this.handleRunClicked}
           />
-          <Output />
+          <Output text={this.state.output} />
         </div>
       </div>
     )
