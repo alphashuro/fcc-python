@@ -3,7 +3,6 @@ import './App.css'
 
 import Challenge from './Challenge'
 import Editor from './Editor'
-import Tests from './Tests'
 import Output from './Output'
 import { compile } from './compiler'
 
@@ -38,7 +37,7 @@ class App extends Component {
       .scan((a, b) => a + b)
       .subscribe(
         output => this.setState({ output }),
-        error => this.setState({ output: error.message })
+        error => this.setState({ output: error.args.v[0].v })
       )
   }
 
@@ -47,7 +46,6 @@ class App extends Component {
       <div className="App flex-grid">
         <div className="col">
           <Challenge />
-          <Tests />
         </div>
         <div className="col">
           <Editor
