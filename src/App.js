@@ -7,6 +7,16 @@ import Tests from './Tests'
 import Output from './Output'
 import { compile } from './compiler'
 
+const test = `
+import unittest
+
+class TestImportNumpy(unittest.TestCase):
+    def test_import_numpy(self):
+      self.assertIsNotNone(numpy)
+
+unittest.main()
+`
+
 class App extends Component {
   state = {
     code: '',
@@ -24,7 +34,7 @@ class App extends Component {
   }
 
   handleRunClicked() {
-    compile(this.state.code)
+    compile(this.state.code + test)
       .scan((a, b) => a + b)
       .subscribe(
         output => this.setState({ output }),
