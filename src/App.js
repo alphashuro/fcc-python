@@ -25,8 +25,11 @@ class App extends Component {
 
   handleRunClicked() {
     compile(this.state.code)
-      .scan((a, b) => a + '\n' + b)
-      .subscribe(output => this.setState({ output }), console.error)
+      .scan((a, b) => a + b)
+      .subscribe(
+        output => this.setState({ output }),
+        error => this.setState({ output: error.message })
+      )
   }
 
   render() {
